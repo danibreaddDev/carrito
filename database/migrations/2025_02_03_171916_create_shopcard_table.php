@@ -18,6 +18,7 @@ class CreateShopcardTable extends Migration
             $table->string("idProducto");
             $table->string("nombre");
             $table->float("precio");
+            $table->integer("cantidad");
             $table->string("idUnico");
             $table->timestamps();
         });

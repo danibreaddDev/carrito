@@ -21,7 +21,7 @@ class ShopCardController extends Controller
     {
         //
         $shopCard = ShopCard::all();
-        return response()->json($shopCard,200);
+        return response()->json($shopCard, 200);
     }
 
     /**
@@ -33,6 +33,14 @@ class ShopCardController extends Controller
     public function store(Request $request)
     {
         //
+        $shopCard = new ShopCard();
+        $shopCard->idProducto = $request->idProducto;
+        $shopCard->nombre = $request->nombre;
+        $shopCard->precio = $request->precio;
+        $shopCard->cantidad = $request->cantidad;
+        $shopCard->idUnico = $request->idUnico;
+        $shopCard->save();
+        return response()->json(["message" => "añadido al carrito"], 201);
     }
 
     /**
@@ -41,9 +49,11 @@ class ShopCardController extends Controller
      * @param  \App\Models\ShopCard  $shopCard
      * @return \Illuminate\Http\Response
      */
-    public function show(ShopCard $shopCard)
+    public function show($id)
     {
         //
+        $shopCard = ShopCard::findOrFail($id);
+        return response()->json($shopCard,200);
     }
 
     /**
@@ -53,9 +63,13 @@ class ShopCardController extends Controller
      * @param  \App\Models\ShopCard  $shopCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ShopCard $shopCard)
+    public function update(Request $request, $id)
     {
         //
+        $shopCard = ShopCard::findOrFail($id);
+        $shopCard->cantidad = $request->cantidad;
+        return response()->json(["message"=>"cantidad actualizada correctamente"]);
+
     }
 
     /**
@@ -64,8 +78,11 @@ class ShopCardController extends Controller
      * @param  \App\Models\ShopCard  $shopCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShopCard $shopCard)
+    public function destroy($id)
     {
         //
+        $shopCard = ShopCard::findOrFail($id);
+        $shopCard->delete();
+        return response()->json(["message"=>"producto eliminado del carrito"]);
     }
 }
