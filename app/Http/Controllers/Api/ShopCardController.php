@@ -21,7 +21,7 @@ class ShopCardController extends Controller
     {
         //
         $shopCard = ShopCard::all();
-        return response()->json(["carrito" => "$shopCard"]);
+        return response()->json($shopCard,200);
     }
 
     /**
