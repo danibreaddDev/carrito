@@ -68,6 +68,7 @@ class ShopCardController extends Controller
         //
         $shopCard = ShopCard::findOrFail($id);
         $shopCard->cantidad = $request->cantidad;
+        $shopCard->save();
         return response()->json(["message"=>"cantidad actualizada correctamente"]);
 
     }
