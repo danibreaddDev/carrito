@@ -17,7 +17,7 @@ class UserFactory extends Factory
         return [
             'username' => $this->faker->name(),
             'password' => bcrypt("1234"), // password
-            'api_token'=> Str::random(20),
+            'api_token'=> "kmbatMHAI4NVYNKvMDyt",
         ];
     }
 
